@@ -8,50 +8,33 @@ function getImages(req, res) {
 
     if (!albumId) {
         // Todas las imagenes en DB
-        Image.find({}).sort('-title').exec((err, images) => {
-            if (err) {
-                res.status(500).send({message: 'Error en la peticion'});
-            }
-            else {
-                if (!images) {
-                    res.status(404).send({message: 'No hay imagenes'});
-                }
-                else {
-                    Album.populate(images, {path: 'album'}, (err, images) => {
-                        if (err) {
-                            res.status(500).send({message: 'Error en la peticion'});
-                        }
-                        else {
-                            res.status(200).send({images});
-                        }
-                    });
-                }
-            }
-        });
+        var find = Image.find({}).sort('-title');
     }
     else {
         // Todas las imagenes del album
-        Image.find({album: albumId}).sort('-title').exec((err, images) => {
-            if (err) {
-                res.status(500).send({message: 'Error en la peticion'});
+        var find = Image.find({album: albumId}).sort('-title');
+    }
+
+    find.exec((err, images) => {
+        if (err) {
+            res.status(500).send({message: 'Error en la peticion'});
+        }
+        else {
+            if (!images) {
+                res.status(404).send({message: 'No hay imagenes'});
             }
             else {
-                if (!images) {
-                    res.status(404).send({message: 'No hay imagenes'});
-                }
-                else {
-                    Album.populate(images, {path: 'album'}, (err, images) => {
-                        if (err) {
-                            res.status(500).send({message: 'Error en la peticion'});
-                        }
-                        else {
-                            res.status(200).send({images});
-                        }
-                    });
-                }
+                Album.populate(images, {path: 'album'}, (err, images) => {
+                    if (err) {
+                        res.status(500).send({message: 'Error en la peticion'});
+                    }
+                    else {
+                        res.status(200).send({images});
+                    }
+                });
             }
-        });
-    }
+        }
+    });
 }
 
 function getImage(req, res) {
