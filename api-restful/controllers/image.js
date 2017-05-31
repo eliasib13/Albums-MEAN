@@ -4,19 +4,54 @@ var Image = require('../models/image');
 var Album = require('../models/album');
 
 function getImages(req, res) {
-    Image.find((err, images) => {
-        if (err) {
-            res.status(500).send({message: 'Error en la peticion'});
-        }
-        else {
-            if (!images) {
-                res.status(404).send({message: 'No existen imagenes'});
+    var albumId = req.params.album;
+
+    if (!albumId) {
+        // Todas las imagenes en DB
+        Image.find({}).sort('-title').exec((err, images) => {
+            if (err) {
+                res.status(500).send({message: 'Error en la peticion'});
             }
-            else {           
-                res.status(200).send(images);
+            else {
+                if (!images) {
+                    res.status(404).send({message: 'No hay imagenes'});
+                }
+                else {
+                    Album.populate(images, {path: 'album'}, (err, images) => {
+                        if (err) {
+                            res.status(500).send({message: 'Error en la peticion'});
+                        }
+                        else {
+                            res.status(200).send({images});
+                        }
+                    });
+                }
             }
-        }
-    });
+        });
+    }
+    else {
+        // Todas las imagenes del album
+        Image.find({album: albumId}).sort('-title').exec((err, images) => {
+            if (err) {
+                res.status(500).send({message: 'Error en la peticion'});
+            }
+            else {
+                if (!images) {
+                    res.status(404).send({message: 'No hay imagenes'});
+                }
+                else {
+                    Album.populate(images, {path: 'album'}, (err, images) => {
+                        if (err) {
+                            res.status(500).send({message: 'Error en la peticion'});
+                        }
+                        else {
+                            res.status(200).send({images});
+                        }
+                    });
+                }
+            }
+        });
+    }
 }
 
 function getImage(req, res) {
