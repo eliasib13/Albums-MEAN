@@ -9,4 +9,4 @@ var ImageSchema = Schema({
     album: { type: Schema.ObjectId, ref: 'Album' }
 });
 
-module.exports = mongoose.model('Image', Image);
+module.exports = mongoose.model('Image', ImageSchema);
