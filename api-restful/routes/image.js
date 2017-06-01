@@ -8,5 +8,6 @@ api.get('/images/:album?', ImageController.getImages);
 api.get('/image/:id', ImageController.getImage);
 api.post('/image', ImageController.saveImage);
 api.put('/image/:id', ImageController.updateImage);
+api.delete('/image/:id', ImageController.deleteImage);
 
 module.exports = api;

@@ -104,9 +104,28 @@ function updateImage(req, res) {
     });
 }
 
+function deleteImage(req, res) {
+    var imageId = req.params.id;
+
+    Image.findByIdAndRemove(imageId, (err, imageRemoved) => {
+        if (err) {
+            res.status(500).send({message: 'Error en la peticion'});
+        }
+        else {
+            if (!imageRemoved) {
+                res.status(404).send({message: 'No existe la imagen'});
+            }
+            else {
+                res.status(200).send(image);
+            }
+        }
+    });
+}
+
 module.exports = {
     getImages,
     getImage,
     saveImage,
-    updateImage
+    updateImage,
+    deleteImage
 }
