@@ -8,11 +8,11 @@ function getImages(req, res) {
 
     if (!albumId) {
         // Todas las imagenes en DB
-        var find = Image.find({}).sort('-title');
+        var find = Image.find({}).sort('title');
     }
     else {
         // Todas las imagenes del album
-        var find = Image.find({album: albumId}).sort('-title');
+        var find = Image.find({album: albumId}).sort('title');
     }
 
     find.exec((err, images) => {
@@ -85,8 +85,28 @@ function saveImage(req, res) {
     });
 }
 
+function updateImage(req, res) {
+    var imageId = req.params.id;
+    var update = req.body;
+
+    Image.findByIdAndUpdate(imageId, update, (err, imageUpdated) => {
+        if (err) {
+            res.status(500).send({message: 'Error en la peticion'});
+        }
+        else {
+            if (!imageUpdated) {
+                res.status(404).send({message: 'No existe la imagen'});
+            }
+            else {
+                res.status(200).send(image);
+            }
+        }
+    });
+}
+
 module.exports = {
     getImages,
     getImage,
-    saveImage
+    saveImage,
+    updateImage
 }
