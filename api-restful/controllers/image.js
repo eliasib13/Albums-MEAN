@@ -151,11 +151,17 @@ function uploadImage(req, res) {
     }
 }
 
+function getImageFile(req, res) {
+    var imageFile = req.params.imageFile;
+    res.sendFile(path.resolve('./uploads/' + imageFile));
+}
+
 module.exports = {
     getImages,
     getImage,
     saveImage,
     updateImage,
     deleteImage,
-    uploadImage
+    uploadImage,
+    getImageFile
 }
