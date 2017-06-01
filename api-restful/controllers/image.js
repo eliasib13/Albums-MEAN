@@ -1,5 +1,6 @@
 'use strict';
 
+var path = require('path');
 var Image = require('../models/image');
 var Album = require('../models/album');
 
@@ -122,10 +123,39 @@ function deleteImage(req, res) {
     });
 }
 
+function uploadImage(req, res) {
+    var imageId = req.params.id;
+    var fileName = 'No subido...';
+
+    if (req.files) {
+        var filePath = req.files.image.path;
+        var fileSplit = filePath.split('\\');
+        fileName = fileSplit[1];
+
+        Image.findByIdAndUpdate(imageId, {picture: fileName}, (err, imageUpdated) => {
+            if (err) {
+                res.status(500).send({message: 'Error en la peticion'});
+            }
+            else {
+                if (!imageUpdated) {
+                    res.status(404).send({message: 'No existe la imagen'});
+                }
+                else {
+                    res.status(200).send({image: imageUpdated});
+                }
+            }
+        });
+    }
+    else {
+        res.status(200).send({message: 'No ha subido ninguna imagen'});
+    }
+}
+
 module.exports = {
     getImages,
     getImage,
     saveImage,
     updateImage,
-    deleteImage
+    deleteImage,
+    uploadImage
 }
