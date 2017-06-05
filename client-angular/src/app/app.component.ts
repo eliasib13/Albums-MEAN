@@ -7,5 +7,6 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  title = 'APP Albums';
+  description = "Aplicacion de albums con Node.js y Angular 2"
 }
