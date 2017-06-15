@@ -18,6 +18,11 @@ export class AlbumService {
                         .map(res => res.json());
     }
 
+    getAlbum(id: string) {
+        return this._http.get(this.url + 'album/' + id)
+                        .map(res => res.json());
+    }
+
     addAlbum(album: Album) {
         let json = JSON.stringify(album);
         let params = json;
