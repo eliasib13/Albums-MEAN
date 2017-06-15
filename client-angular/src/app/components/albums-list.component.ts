@@ -14,6 +14,7 @@ export class AlbumsListComponent implements OnInit {
     public title: string;
     public albums: Album[];
     public errorMessage: any;
+    public loading: boolean;
 
     constructor (
         private _route: ActivatedRoute,
@@ -29,6 +30,7 @@ export class AlbumsListComponent implements OnInit {
     }
 
     getAlbums() {
+        this.loading = true;
         this._albumService.getAlbums().subscribe(
             result => {
                 this.albums = result.albums;
@@ -36,6 +38,8 @@ export class AlbumsListComponent implements OnInit {
                 if (!this.albums) {
                     alert('Error en el servidor');
                 }
+
+                this.loading = false;
             },
             error => {
                 this.errorMessage = <any>error;

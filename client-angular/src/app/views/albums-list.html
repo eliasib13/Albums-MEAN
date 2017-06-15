@@ -1,5 +1,9 @@
 <h1>{{title}}</h1>
 
+<div class="loading" *ngIf="loading">
+    <img src="../assets/img/loader.gif" />
+</div>
+
 <ul id="albums-list">
     <li *ngFor="let album of albums" class="album-item">
         <div class="data">
