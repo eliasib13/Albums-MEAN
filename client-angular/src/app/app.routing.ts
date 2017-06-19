@@ -5,12 +5,14 @@ import { AlbumsListComponent } from './components/albums-list.component';
 import { AlbumAddComponent } from './components/album-add.component';
 import { AlbumDetailComponent } from './components/album-detail.component';
 import { AlbumEditComponent } from './components/album-edit.component';
+import { ImageAddComponent } from './components/image-add.component';
 
 const appRoutes: Routes = [
     {path: '', component: AlbumsListComponent},
     {path: 'crear-album', component: AlbumAddComponent},
     {path: 'editar-album/:id', component: AlbumEditComponent},
     {path: 'album/:id', component: AlbumDetailComponent},
+    {path: 'crear-imagen', component: ImageAddComponent},
     {path: '**', component: AlbumsListComponent}
 ];
 
