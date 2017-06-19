@@ -12,7 +12,7 @@ const appRoutes: Routes = [
     {path: 'crear-album', component: AlbumAddComponent},
     {path: 'editar-album/:id', component: AlbumEditComponent},
     {path: 'album/:id', component: AlbumDetailComponent},
-    {path: 'crear-imagen', component: ImageAddComponent},
+    {path: 'crear-imagen/:album', component: ImageAddComponent},
     {path: '**', component: AlbumsListComponent}
 ];
 

@@ -29,24 +29,29 @@ export class ImageAddComponent implements OnInit {
     }
 
     onSubmit() {
-        this._imageService.addImage(this.image).subscribe(
-            response => {
-                this.image = response.image;
+        this._route.params.forEach((params: Params) => {
+            let albumId = params['album'];
 
-                if (!response.image) {
-                    alert("Error en el servidor");
-                }
-                else {
-                    // this._router.navigate(['/album', id]);
-                }
-            },
-            error => {
-                this.errorMessage = <any>error;
+            this._imageService.addImage(this.image).subscribe(
+                response => {
+                    this.image = response.image;
+                    this.image.album = albumId;
 
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
+                    if (!response.image) {
+                        alert("Error en el servidor");
+                    }
+                    else {
+                        // this._router.navigate(['/album', albumId]);
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                    }
                 }
-            }
-        );
+            );
+        });
     }
 }
