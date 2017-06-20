@@ -31,11 +31,11 @@ export class ImageAddComponent implements OnInit {
     onSubmit() {
         this._route.params.forEach((params: Params) => {
             let albumId = params['album'];
+            this.image.album = albumId;
 
             this._imageService.addImage(this.image).subscribe(
                 response => {
                     this.image = response.image;
-                    this.image.album = albumId;
 
                     if (!response.image) {
                         alert("Error en el servidor");

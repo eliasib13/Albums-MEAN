@@ -56,7 +56,7 @@ function getImage(req, res) {
                         res.status(500).send({message: 'Error en la peticion'});
                     }
                     else {
-                        res.status(200).send(image);
+                        res.status(200).send({image});
                     }
                 });
             }
@@ -81,7 +81,7 @@ function saveImage(req, res) {
                 res.status(404).send({message: 'No existe la imagen'});
             }
             else {
-                res.status(200).send(image);
+                res.status(200).send({image: imageStored});
             }
         }
     });
@@ -100,7 +100,7 @@ function updateImage(req, res) {
                 res.status(404).send({message: 'No existe la imagen'});
             }
             else {
-                res.status(200).send(image);
+                res.status(200).send({image: imageUpdated});
             }
         }
     });
@@ -118,7 +118,7 @@ function deleteImage(req, res) {
                 res.status(404).send({message: 'No existe la imagen'});
             }
             else {
-                res.status(200).send(image);
+                res.status(200).send({image: imageRemoved});
             }
         }
     });
