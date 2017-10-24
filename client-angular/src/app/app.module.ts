@@ -11,6 +11,7 @@ import { AlbumAddComponent } from './components/album-add.component';
 import { AlbumDetailComponent } from './components/album-detail.component';
 import { AlbumEditComponent } from './components/album-edit.component';
 import { ImageAddComponent } from './components/image-add.component';
+import { ImageEditComponent } from './components/image-edit.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ImageAddComponent } from './components/image-add.component';
     AlbumAddComponent,
     AlbumDetailComponent,
     AlbumEditComponent,
-    ImageAddComponent
+    ImageAddComponent,
+    ImageEditComponent
   ],
   imports: [
     BrowserModule,
