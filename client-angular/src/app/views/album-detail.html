@@ -18,7 +18,7 @@
                         <img src="{{apiUrl + image.picture}}" *ngIf="image.picture && image.picture !== null"/>
                     </div>
                     <div class="title">
-                        <a href="#">{{image.title}}</a>
+                        <a [routerLink]="['/imagen', image._id]">{{image.title}}</a>
                     </div>
                 </li>
             </ul>

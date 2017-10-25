@@ -154,7 +154,7 @@ header #logo {
     margin-left: 0px;
 }
 
-.album-box {
+.album-box, .image-box {
     margin-left: 25px;
     background: white;
     color: black;
@@ -164,6 +164,10 @@ header #logo {
     padding: 20px;
     padding-bottom: 20px;
     margin-top: 20px;
+}
+
+.image-box .imagen {
+    width: 100%;
 }
 
 .loading {
