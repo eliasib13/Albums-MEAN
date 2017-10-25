@@ -13,6 +13,11 @@ export class ImageService {
         this.url = GLOBAL.url;
     }
 
+    getApiUrl(segment = '') : string {
+        var url = this.url + segment;
+        return url;
+    }
+
     getImages(albumId = null) {
         if (albumId == null) {
             return this._http.get(this.url + 'images')
